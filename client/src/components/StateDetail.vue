@@ -8,7 +8,7 @@
 
         <div id="map-container">
             <l-map
-                ref="stateMap"
+                ref="map"
                 style="height: 100%; width: 100%"
                 v-bind:zoom="zoom"
                 v-bind:center="center">
@@ -33,14 +33,14 @@ export default {
                 name: ''
             },
             url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-            zoom: 2,
-            center: [44, -103], // geo center for the map
-            bounds: null
+            // zoom: 2,
+            // center: [44, -103], // geo center for the map
+            // bounds: null
         }
     },
     mounted() {
         this.state.name = this.$route.params.state
-        // this.$refs.stateMap.mapObject.dragging.disable()
+        // this.$refs.map.mapObject.dragging.disable()
         this.fetchStateData()
     },
     methods: {
@@ -51,7 +51,7 @@ export default {
                 this.center = [data.lat, data.lon]
                 console.log(this.center)
                 // flies to center of the states coords.
-                this.$refs.stateMap.mapObject.setView(this.center, this.zoom)
+                this.$refs.map.mapObject.setView(this.center, 5)
             }).catch( err => console.error(err))
         }
     }
