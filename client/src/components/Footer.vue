@@ -3,6 +3,9 @@
 
         <div class="m-2">
             <span class="p-3">
+                <router-link to="/fullmap">Full map of states</router-link>
+            </span>
+            <span class="p-3">
                 <router-link to="/">Home</router-link>
             </span>
 
@@ -15,6 +18,8 @@
             <a href="https://unsplash.com/photos/KpBXAOs80YI">@chrislawton via Unsplash.</a>
             <br>
             <a href="https://icons8.com/icon/43632/map">Map icon by Icons8</a>
+            <br>
+            <a href="https://icons8.com/icon/97370/push-pin">Push Pin icon by Icons8</a>
         </p>
 
     </div>

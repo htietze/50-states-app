@@ -10,8 +10,7 @@
             <l-map
                 ref="map"
                 style="height: 100%; width: 100%"
-                v-bind:zoom="zoom"
-                v-bind:center="center">
+                v-bind:zoom="zoom">
                 <l-tile-layer :url="url"></l-tile-layer>
             </l-map>
         </div>
@@ -20,7 +19,14 @@
 </template>
 
 <script>
+import L from 'leaflet'
 import { LMap, LTileLayer } from 'vue2-leaflet'
+
+let icon = L.icon({
+    iconUrl: require('../assets/icons8-push-pin-64.png'),
+    iconSize: [50, 50],
+    iconAnchor: [30, 30]
+})
 
 export default {
     name: 'StateDetail',
@@ -33,9 +39,7 @@ export default {
                 name: ''
             },
             url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-            // zoom: 2,
-            // center: [44, -103], // geo center for the map
-            // bounds: null
+            zoom: 0,
         }
     },
     mounted() {
@@ -52,6 +56,11 @@ export default {
                 console.log(this.center)
                 // flies to center of the states coords.
                 this.$refs.map.mapObject.setView(this.center, 5)
+                L.marker([this.center[0], this.center[1]], {icon: icon}).addTo(this.$refs.map.mapObject)
+
+
+                // marker = L.marker([this.center[0], this.center[1]], {icon: icon}).addTo(this.$refs.map)
+                // this.markerLatLng = [this.center[0], this.center[1]]
             }).catch( err => console.error(err))
         }
     }

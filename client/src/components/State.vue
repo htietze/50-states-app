@@ -9,7 +9,10 @@
 
         <p>
             <router-link v-bind:to="{ name: 'detail', params: { state: stateName } }">
-                <img class="map-icon" src="@/assets/icons8-map-64.png">
+                <img class="icon" src="@/assets/icons8-map-64.png">
+            </router-link>
+            <router-link v-bind:to="{ name: 'journal', params: { state: stateName } }">
+                <img class="icon" src="@/assets/icons8-bookmark-64.png">
             </router-link>
         </p>
 
@@ -41,7 +44,7 @@ export default {
         background-color: whitesmoke;
     }
 
-    .map-icon {
+    .icon {
         width: 2em;
         height: 2em;
     }
