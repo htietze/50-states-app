@@ -308,7 +308,8 @@ const states = [
      "zoom":5
   }
 ]
-
+// Up is for seeding a database, down is for reverting it, so deleting all the data
+// for every row, the statesDates will add the created and uploaded data as well.
 module.exports = {
   up: (queryInterface, Sequelize) => {
     /*

@@ -3,11 +3,14 @@
 
         <span class="m-2">{{ state.name }}</span>
         <p>
+            <!-- each state has a connected checkbox, that can emit the change, which then runs a method
+            in the StateList.vue component. -->
             <input id="visited" class="m-2" type="checkbox"
             v-model="stateVisited" v-on:change="$emit('isVisited', stateName, stateVisited)">
         </p>
 
         <p>
+            <!-- router links within each State component, that link to its specific detail and journal pages -->
             <router-link v-bind:to="{ name: 'detail', params: { state: stateName } }">
                 <img class="icon" src="@/assets/icons8-map-64.png">
             </router-link>

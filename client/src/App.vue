@@ -1,6 +1,7 @@
 <template>
   <div id="app">
 
+    <!-- kinda neat, the three components fill in themselves here. -->
     <Header></Header>
     <RouterView></RouterView>
     <Footer></Footer>
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+// importing components to make the app
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 

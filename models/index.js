@@ -1,5 +1,6 @@
 'use strict';
-
+// for reading the database? indexing it with fs. tells it the environment using the development settings
+// and where to find the config settings.
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');

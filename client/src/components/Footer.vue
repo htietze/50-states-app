@@ -3,7 +3,9 @@
 
         <div class="m-2">
             <span class="p-3">
-                <router-link to="/fullmap">Full map of states</router-link>
+                <!-- Footer contains 3 links, routing to the full map, the home page, and the about page
+                These routes are set in the /router/index.js file, naming the components to display -->
+                <router-link to="/fullmap">Full Map</router-link>
             </span>
             <span class="p-3">
                 <router-link to="/">Home</router-link>

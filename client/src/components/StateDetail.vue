@@ -7,6 +7,7 @@
         <p v-else>You have not visited this state</p>
 
         <div id="map-container">
+            <!-- Fixed state detail! -->
             <l-map
                 ref="map"
                 style="height: 100%; width: 100%"
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+// L to set the icon, LMap to set the base, LTileLayer to fill that base, LMarker to add markers
 import L from 'leaflet'
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 
@@ -49,19 +51,25 @@ export default {
         }
     },
     mounted() {
+        // a state's name is sent when this route is used
         this.state.name = this.$route.params.state
-        // this.$refs.map.mapObject.dragging.disable()
+        // so the method gets that state's data to use for the lat and long data
         this.fetchStateData()
     },
     methods: {
         fetchStateData() {
+            // the API is used to get that state's data, which is then fed in
             this.$stateService.getOne( this.state.name ).then( data => {
+                // the state, zoom, center, and marker location are created with it
                 this.state = data
                 this.zoom = data.zoom
                 this.center = [data.lat, data.lon]
                 this.markerLatLong = this.center
-                // flies to center of the states coords.
+                // flies to center of the states coords
+                // next tick is needed because the map isn't always populated at this point
+                // thanks for the info on this!
                 this.$nextTick( () => {
+                    // once that's done, the map can be moved to the appropriate coordinates and zoom level
                     this.$refs.map.mapObject.flyTo(this.center, this.zoom)
                 })
             }).catch( err => console.error(err))
