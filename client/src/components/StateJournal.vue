@@ -14,6 +14,8 @@
         <div v-if="edit">
         <textarea id="journal" rows="10" cols="50" v-model="state.journal">
         </textarea>
+        <!-- Added a last minute text count because it annoyed me. -->
+        <p id="characterCount">{{ state.journal | countCharacters }}/1000</p>
         <br>
         <!-- additionally, a button will run the method to save it, only appearing when Edit is checked
         and it'll uncheck edit after it's been saved. -->
@@ -63,7 +65,14 @@ export default {
                 this.fetchStateData()
             })
         }
-    }
+    },
+    // filter to simply take the max set length of the journal field, 
+    // which the config has set to 1000 now.
+    filters: {
+        countCharacters: function(string) {
+                return 1000-(string.length)
+            }
+        }
 }
 </script>
 
@@ -75,5 +84,9 @@ export default {
         margin-right: 20%;
         text-align: left;
         background-color: whitesmoke;
+    }
+
+    #characterCount {
+        color: lightgray
     }
 </style>
