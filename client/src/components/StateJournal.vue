@@ -70,9 +70,11 @@ export default {
     // which the config has set to 1000 now.
     filters: {
         countCharacters: function(string) {
+            if (string !== null) {
                 return 1000-(string.length)
             }
         }
+    }
 }
 </script>
 
