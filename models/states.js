@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     lat: DataTypes.FLOAT,
     lon: DataTypes.FLOAT,
     zoom: DataTypes.INTEGER,
-    journal: DataTypes.STRING
+    journal: DataTypes.STRING(1000)
   }, {});
   States.associate = function(models) {
     // associations can be defined here

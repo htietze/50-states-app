@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       journal: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000)
       },
       createdAt: {
         allowNull: false,
