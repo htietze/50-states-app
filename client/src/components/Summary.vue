@@ -27,6 +27,8 @@ export default {
 }
 </script>
 
+
+
 <style scoped>
     #visited-all {
         color: green;
