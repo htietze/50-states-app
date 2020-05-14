@@ -1,6 +1,9 @@
 {
   "name": "vue-states",
   "version": "1.0.0",
+  "engines": {
+    "node": "13.13.0"
+  },
   "description": "Have you visit all the states?",
   "main": "server.js",
   "scripts": {
