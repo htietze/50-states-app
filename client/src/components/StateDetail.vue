@@ -10,7 +10,12 @@
             <l-map
                 ref="map"
                 style="height: 100%; width: 100%"
+                v-bind:center="startCenter"
                 v-bind:zoom="zoom">
+                <l-marker 
+                    v-bind:lat-lng="markerLatLong"
+                    v-bind:icon="icon"
+                    ></l-marker>
                 <l-tile-layer :url="url"></l-tile-layer>
             </l-map>
         </div>
@@ -20,26 +25,27 @@
 
 <script>
 import L from 'leaflet'
-import { LMap, LTileLayer } from 'vue2-leaflet'
-
-let icon = L.icon({
-    iconUrl: require('../assets/icons8-push-pin-64.png'),
-    iconSize: [50, 50],
-    iconAnchor: [30, 30]
-})
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 
 export default {
     name: 'StateDetail',
     components: {
-        LMap, LTileLayer
+        LMap, LTileLayer, LMarker
     },
     data() {
         return {
             state: {
                 name: ''
             },
+            startCenter: [40, -90],
             url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
             zoom: 0,
+            markerLatLong: [0, 0],
+            icon: L.icon({
+                iconUrl: require('../assets/icons8-push-pin-64.png'),
+                iconSize: [50, 50],
+                iconAnchor: [30, 30]
+            })
         }
     },
     mounted() {
@@ -53,14 +59,11 @@ export default {
                 this.state = data
                 this.zoom = data.zoom
                 this.center = [data.lat, data.lon]
-                console.log(this.center)
+                this.markerLatLong = this.center
                 // flies to center of the states coords.
-                this.$refs.map.mapObject.setView(this.center, 5)
-                L.marker([this.center[0], this.center[1]], {icon: icon}).addTo(this.$refs.map.mapObject)
-
-
-                // marker = L.marker([this.center[0], this.center[1]], {icon: icon}).addTo(this.$refs.map)
-                // this.markerLatLng = [this.center[0], this.center[1]]
+                this.$nextTick( () => {
+                    this.$refs.map.mapObject.flyTo(this.center, this.zoom)
+                })
             }).catch( err => console.error(err))
         }
     }

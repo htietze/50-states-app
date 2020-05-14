@@ -9,8 +9,17 @@
                 ref="map"
                 style="height: 100%; width: 100%"
                 v-bind:zoom="zoom"
-                v-bind:center="center"
-                >
+                v-bind:center="center">
+
+            <!-- https://github.com/vue-leaflet/Vue2Leaflet/issues/275 -->
+
+                <l-marker
+                    v-for="state in visitedStates"
+                    v-bind:key="state.name"
+                    v-bind:lat-lng="[state.lat, state.lon]"
+                    v-bind:icon="icon">
+                <l-popup>{{ state.name }}</l-popup>
+                </l-marker>
                 <l-tile-layer :url="url"></l-tile-layer>
             </l-map>
         </div>
@@ -20,18 +29,12 @@
 
 <script>
 import L from 'leaflet'
-import { LMap, LTileLayer } from 'vue2-leaflet'
-
-let icon = L.icon({
-    iconUrl: require('../assets/icons8-push-pin-64.png'),
-    iconSize: [30, 30],
-    iconAnchor: [15, 15]
-})
+import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'
 
 export default {
     name: 'FullMap',
     components: {
-        LMap, LTileLayer
+        LMap, LTileLayer, LMarker, LPopup
     },
     data() {
         return {
@@ -39,7 +42,13 @@ export default {
             visitedStates: [],
             url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
             zoom: 4,
-            center: [38, -96]
+            center: [38, -96],
+            // markerInfo: {},
+            icon: L.icon({
+                iconUrl: require('../assets/icons8-push-pin-64.png'),
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            })
         }
     },
     mounted() {
@@ -49,7 +58,6 @@ export default {
         getAll() {
             this.$stateService.getAll().then(data => {
                 this.states = data
-                console.log(this.states)
                 this.findVisited(this.states)
             })
         },
@@ -59,17 +67,18 @@ export default {
                     this.visitedStates.push(element)
                 }
             })
-            this.addMarkers()
+            // this.addMarkers()
         },
-        addMarkers() {
-            this.visitedStates.forEach(element => {
-                let lat = element.lat
-                let long = element.lon
-                L.marker([lat, long], {icon: icon})
-                    .bindPopup(`${element.name}`)
-                    .addTo(this.$refs.map.mapObject)
-            })
-        }
+        // addMarkers() {
+        //     this.visitedStates.forEach(element => {
+        //         let markerLatLong = [element.lat, element.lon]
+
+
+                // L.marker([lat, long], {icon: icon})
+                //     .bindPopup(`${element.name}`)
+                //     .addTo(this.$refs.map.mapObject)
+            // })
+        // }
     }
 }
 </script>

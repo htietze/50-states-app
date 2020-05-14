@@ -13,6 +13,12 @@ export default {
         })
     },
 
+    setJournal(stateName, journal) {
+        return axios.patch('/api/journal/'+ stateName, { journal: journal }).then(response => {
+            return response.data
+        })
+    },
+
     getOne(stateName) {
         return axios.get('/api/states/' + stateName).then( response => {
             return response.data

@@ -23,6 +23,9 @@ module.exports = {
       zoom: {
         type: Sequelize.INTEGER
       },
+      journal: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

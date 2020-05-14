@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     visited: DataTypes.BOOLEAN,
     lat: DataTypes.FLOAT,
     lon: DataTypes.FLOAT,
-    zoom: DataTypes.INTEGER
+    zoom: DataTypes.INTEGER,
+    journal: DataTypes.STRING
   }, {});
   States.associate = function(models) {
     // associations can be defined here
