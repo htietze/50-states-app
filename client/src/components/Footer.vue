@@ -22,6 +22,8 @@
             <a href="https://icons8.com/icon/43632/map">Map icon by Icons8</a>
             <br>
             <a href="https://icons8.com/icon/97370/push-pin">Push Pin icon by Icons8</a>
+            <br>
+            <a href="https://icons8.com/icon/44781/bookmark">Bookmark icon by Icons8</a>
         </p>
 
     </div>
